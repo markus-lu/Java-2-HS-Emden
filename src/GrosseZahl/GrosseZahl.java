@@ -118,16 +118,43 @@ public class GrosseZahl {
 
     public GrosseZahl sub(GrosseZahl a) {
 
-        GrosseZahl ergebnis = new GrosseZahl(0);
         ArrayList<Integer> erg = new ArrayList<>();
         int buffer = 0;
-        boolean state = less(a);
+        int testBuffer = 0;
 
-        if (state) {
+        if (a.intArray.length < intArray.length) {
+            a = arrayAdjust(a.intArray, intArray.length);
         }
 
 
-        return ergebnis;
+        for (int i = intArray.length - 1; i >= 0; i--) {
+            testBuffer = a.intArray[i] + buffer;
+
+            if (testBuffer > intArray[i]) {
+                buffer = buffer + a.intArray[i];
+                erg.add((intArray[i] + 10) - buffer);
+                buffer = 1;
+                testBuffer = 0;
+
+            } else {
+                erg.add(getZahl(i) - (a.getZahl(i) + buffer));
+                buffer = 0;
+                testBuffer = 0;
+            }
+        }
+
+        for (int i = erg.size() - 1; i >= 0; i--) {
+            if (erg.get(i) == 0) {
+                erg.remove(i);
+            } else {
+                break;
+            }
+        }
+        if (erg.isEmpty()) {
+            erg.add(0);
+        }
+
+        return new GrosseZahl(listToString(erg));
     }
 
 
