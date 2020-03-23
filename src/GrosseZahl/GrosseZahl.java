@@ -157,6 +157,24 @@ public class GrosseZahl {
         return new GrosseZahl(listToString(erg));
     }
 
+    GrosseZahl ggT(GrosseZahl a) {
+
+        GrosseZahl buffer;
+        if (gleich(a)) {
+            return a;
+        }
+
+        if (a.less(this)) {
+            buffer = sub(a);
+            return a.ggT(buffer);
+        } else {
+            buffer = a.sub(this);
+            return ggT(buffer);
+        }
+
+
+    }
+
 
     private String listToString(ArrayList<Integer> a) {
         String erg = "";
@@ -203,6 +221,22 @@ public class GrosseZahl {
         return new GrosseZahl(erg);
     }
 
+    public boolean gleich(GrosseZahl a) {
+
+        if (intArray.length != a.intArray.length) {
+            return false;
+        } else {
+            for (int i = 0; i <= intArray.length - 1; i++) {
+                if (intArray[i] != a.intArray[i]) {
+                    return false;
+                }
+
+            }
+
+        }
+
+        return true;
+    }
 
     private int[] StringToArray(String zahl) {
 

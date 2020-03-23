@@ -140,12 +140,12 @@ public class GrosseZahl_Test {
 		assertEquals("913517247483640899", z.toString());
 	}
 
-/*	@Test
+	@Test
 	public void testGGT() {
-		assertEquals("23",i283935.ggT(s2737).toString());
-		assertEquals("23",s2737.ggT(i283935).toString());
-		
-		assertEquals("2737",s2737.ggT(s2737).toString());
-		assertEquals("1",s2736.ggT(s2737).toString());
-	}*/
+		assertEquals("23", i283935.ggT(s2737).toString());
+		assertEquals("23", s2737.ggT(i283935).toString());
+
+		assertEquals("2737", s2737.ggT(s2737).toString());
+		assertEquals("1", s2736.ggT(s2737).toString());
+	}
 }
