@@ -201,16 +201,7 @@ public class GrosseZahl {
     }
 
 
-    private GrosseZahl fillArrayWithZeros(int lenght) {
 
-        String numbers = "";
-        for (int i = 0; i <= lenght; i++) {
-            numbers = numbers + "0";
-        }
-        GrosseZahl Zero = new GrosseZahl(numbers);
-
-        return Zero;
-    }
 
     private GrosseZahl arrayAdjust(int[] array, int lenght) {
 
