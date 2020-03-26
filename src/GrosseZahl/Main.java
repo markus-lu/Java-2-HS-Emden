@@ -12,6 +12,7 @@ public class Main {
         //System.out.println(a.mult(b));
         System.out.println(a.ggT(b));
         System.out.println(a.gleich(b));
+        System.out.println(a);
     }
 }
 
