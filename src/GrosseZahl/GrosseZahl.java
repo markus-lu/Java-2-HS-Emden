@@ -33,11 +33,12 @@ public class GrosseZahl {
 
 
         }
-        return false;
+        return false;     // gleich gross
     }
 
     public GrosseZahl add(GrosseZahl a) {
 
+        //kleinere zahhl wird mit nullen aufgefüllt
         int leangth = 0;
         GrosseZahl b;
         boolean state;
@@ -51,7 +52,9 @@ public class GrosseZahl {
             state = false;
         }
 
+
         ArrayList<Integer> erg = new ArrayList<>();
+
         int buffer = 0;
         for (int i = leangth - 1; i >= 0; i--) {
             if (!state) {
@@ -85,16 +88,18 @@ public class GrosseZahl {
         GrosseZahl ergebnis = new GrosseZahl(0);
         int buffer = 0;
 
+        // nullen hinten anfügen für pluss rechnung nacher
         for (int i = 0; i < intArray.length; i++) {
             for (int j = i; j < intArray.length - 1; j++) {
                 erg = "0" + erg;
             }
+
             for (int j = a.intArray.length - 1; j >= 0; j--) {
                 buffer = getZahl(i) * a.getZahl(j) + buffer;
 
                 if (buffer >= 10) {
-                    erg = buffer % 10 + erg;
-                    buffer = buffer / 10;
+                    erg = buffer % 10 + erg; // hintere zahl
+                    buffer = buffer / 10; // vordere zahl
                 } else {
                     erg = buffer + erg;
                     buffer = 0;
@@ -116,12 +121,13 @@ public class GrosseZahl {
         return ergebnis;
     }
 
-    public GrosseZahl sub(GrosseZahl a) {
+    private GrosseZahl sub(GrosseZahl a) {
 
         ArrayList<Integer> erg = new ArrayList<>();
         int buffer = 0;
         int testBuffer = 0;
 
+        // this ist immer gößer
         if (a.intArray.length < intArray.length) {
             a = arrayAdjust(a.intArray, intArray.length);
         }
