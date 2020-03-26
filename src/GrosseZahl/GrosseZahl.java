@@ -260,7 +260,7 @@ public class GrosseZahl {
     }
 
 
-    public int[] IntToArray(int zahl) {
+    private int[] IntToArray(int zahl) {
 
         String buffer = "";
         buffer = buffer.valueOf(zahl);
