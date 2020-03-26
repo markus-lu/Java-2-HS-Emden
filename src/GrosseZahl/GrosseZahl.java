@@ -163,7 +163,7 @@ public class GrosseZahl {
         return new GrosseZahl(listToString(erg));
     }
 
-    GrosseZahl ggT(GrosseZahl a) {
+   public GrosseZahl ggT(GrosseZahl a) {
 
         GrosseZahl buffer;
         if (gleich(a)) {
