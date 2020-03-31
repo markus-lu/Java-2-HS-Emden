@@ -48,6 +48,10 @@ public class CharCollection {
 
     public char top() {
 
+        if (chars.size() == 0) {
+            return 0;
+        }
+
         char top = chars.get(0);
         int counter1 = 0;
         int counter2 = 0;
