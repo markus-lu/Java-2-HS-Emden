@@ -1,6 +1,7 @@
 package CharCollection;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 
 public class CharCollection {
@@ -14,6 +15,7 @@ public class CharCollection {
     }
 
     CharCollection(String input) {
+
 
         char[] buffer;
         buffer = input.toCharArray();
@@ -75,16 +77,17 @@ public class CharCollection {
 
     public String toString() {
 
-        String ergebnis = "";
+        String ergebnis = "(";
 
         for (int i = 0; i < chars.size(); i++) {
             ergebnis = ergebnis + chars.get(i);
 
             if (i != chars.size() - 1) {
-                ergebnis = ergebnis + ",";
+                ergebnis = ergebnis + ", ";
             }
 
         }
+        ergebnis = ergebnis + ")";
         return ergebnis;
     }
 
@@ -92,5 +95,97 @@ public class CharCollection {
         return chars.size();
     }
 
+    public CharCollection moreThan(int n) {
+        String erg = "";
+        int counter = 0;
+        for (char c : chars) {
+            for (char c1 : chars) {
+                if (c == c1) {
+                    counter++;
+                }
+            }
+            if (counter > n) {
+                erg = erg + c;
+            }
+            counter = 0;
+        }
+        CharCollection rückgabe = new CharCollection(erg);
+        rückgabe.Sort();
 
+        return rückgabe;
+    }
+
+    /*public boolean equals(Object o) {
+
+        if (o instanceof CharCollection) {
+            CharCollection c = (CharCollection) o;
+            if (chars.size() == c.chars.size()) {
+                for(int i = 0; i < chars.size(); i++){
+                    for(int j=0; j< chars.size();j++){
+
+                    }
+
+
+
+                }
+
+                }
+            }
+            return false;
+
+
+    }*/
+
+
+    public CharCollection except(CharCollection cc) {
+        HashSet<Character> remove = new HashSet<>();
+        String erg = "";
+        for (char c : cc.chars) {
+            remove.add(c);
+        }
+
+        for (int i = 0; i < chars.size(); i++) {
+            if (!remove.contains(chars.get(i))) {
+                erg = erg + chars.get(i);
+            }
+        }
+
+        return new CharCollection(erg);
+    }
+
+
+    public boolean isSubset(CharCollection cc) {
+
+        ArrayList<Character> remove = new ArrayList<>(cc.chars);
+        ArrayList<Character> abgleich = new ArrayList<>(chars);
+
+        for (Character c : cc.chars) {
+            if (chars.contains(c.charValue())) {
+                if (abgleich.contains(c.charValue())) {
+                    try {
+                        remove.remove(c);
+                        abgleich.remove(c);
+                    } catch (Exception e) {
+                        return false;
+                    }
+                }
+
+            } else {
+                return false;
+            }
+        }
+        if (remove.size() > 0) {
+            return false;
+        }
+
+        return true;
+
+    }
+
+    private CharCollection Sort() {
+        Collections.sort(chars);
+        return new CharCollection(toString());
+    }
 }
+
+
