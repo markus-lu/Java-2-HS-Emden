@@ -115,39 +115,41 @@ public class CharCollection {
         return rückgabe;
     }
 
-    /*public boolean equals(Object o) {
+    public boolean equals(Object o) {
+        boolean gleich = false;
 
         if (o instanceof CharCollection) {
             CharCollection c = (CharCollection) o;
+
+            if (c.size() == 0 && size() == 0) {
+                return true;
+            }
             if (chars.size() == c.chars.size()) {
-                for(int i = 0; i < chars.size(); i++){
-                    for(int j=0; j< chars.size();j++){
-
+                for (int i = 0; i < chars.size(); i++) {
+                    if (chars.contains(c.chars.get(i))) {
+                        if (count(chars.get(i)) == c.count(c.chars.get(i))) {
+                            gleich = true;
+                        }
                     }
-
-
-
-                }
-
                 }
             }
-            return false;
-
-
-    }*/
-
+        }
+        return gleich;
+    }
 
     public CharCollection except(CharCollection cc) {
-        HashSet<Character> remove = new HashSet<>();
-        String erg = "";
-        for (char c : cc.chars) {
-            remove.add(c);
-        }
+        ArrayList<Character> remove = new ArrayList<>(cc.chars);
 
-        for (int i = 0; i < chars.size(); i++) {
-            if (!remove.contains(chars.get(i))) {
-                erg = erg + chars.get(i);
+        String erg = "";
+
+
+        for (Character c : chars) {
+            if (remove.contains(c.charValue())) {
+                remove.remove(c);
+            } else {
+                erg += c;
             }
+
         }
 
         return new CharCollection(erg);
@@ -182,10 +184,11 @@ public class CharCollection {
 
     }
 
+
     private CharCollection Sort() {
         Collections.sort(chars);
         return new CharCollection(toString());
     }
+
+
 }
-
-
