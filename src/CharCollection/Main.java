@@ -6,11 +6,13 @@ public class Main {
 
         CharCollection test = new CharCollection("hallo");
         CharCollection test2 = new CharCollection('A', 'B', 'C');
-        CharCollection test3 = new CharCollection('A', 'B', 'C');
+        CharCollection test3 = new CharCollection('A', 'C', 'B');
         //CharCollection test4 = new CharCollection("");
         //CharCollection b = new CharCollection('H', 'O', 'C', 'H', 'S', 'C', 'H', 'U', 'L', 'E');
 
-        System.out.println(test.equals(test3));
+        System.out.println(test2.equals(test3));
+
+        //System.out.println(test.equals(test3));
         //System.out.println(test.toString());
         //System.out.println(test.size());
         //System.out.println(test.different());

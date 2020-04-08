@@ -124,12 +124,20 @@ public class CharCollection {
             if (c.size() == 0 && size() == 0) {
                 return true;
             }
-            if (chars.size() == c.chars.size()) {
+            CharCollection cc = c.Sort();
+            CharCollection cc1 = Sort();
+            if (cc1.chars.size() == cc.chars.size()) {
                 for (int i = 0; i < chars.size(); i++) {
-                    if (chars.contains(c.chars.get(i))) {
-                        if (count(chars.get(i)) == c.count(c.chars.get(i))) {
+                    if (cc1.chars.contains(cc.chars.get(i))) {
+                        //int test =count(chars.get(i));
+                        //int test1 = cc.count(cc.chars.get(i));
+                        if (count(cc1.chars.get(i)) == c.count(cc.chars.get(i))) {
                             gleich = true;
+                        } else {
+                            return false;
                         }
+                    } else {
+                        return false;
                     }
                 }
             }
@@ -186,8 +194,13 @@ public class CharCollection {
 
 
     private CharCollection Sort() {
-        Collections.sort(chars);
-        return new CharCollection(toString());
+        ArrayList<Character> copy = new ArrayList<>(chars);
+        Collections.sort(copy);
+        StringBuilder sb = new StringBuilder();
+        for (Character c : copy) {
+            sb.append(c);
+        }
+        return new CharCollection(sb.toString());
     }
 
 
