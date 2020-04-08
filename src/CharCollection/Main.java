@@ -9,7 +9,7 @@ public class Main {
         CharCollection test3 = new CharCollection('A', 'C', 'B');
         //CharCollection test4 = new CharCollection("");
         //CharCollection b = new CharCollection('H', 'O', 'C', 'H', 'S', 'C', 'H', 'U', 'L', 'E');
-
+        // komemtat
         System.out.println(test2.equals(test3));
 
         //System.out.println(test.equals(test3));
