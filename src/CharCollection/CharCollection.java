@@ -3,10 +3,11 @@ package CharCollection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 
 public class CharCollection {
 
-    ArrayList<Character> chars = new ArrayList<>();
+    List<Character> chars = new ArrayList<>();
 
     CharCollection(char... args) {
         for (char c : args) {
@@ -16,14 +17,8 @@ public class CharCollection {
 
     CharCollection(String input) {
 
+        this(input.toCharArray());
 
-        char[] buffer;
-        buffer = input.toCharArray();
-
-        for (int i = 0; i < buffer.length; i++) {
-            chars.add(buffer[i]);
-
-        }
     }
 
     public int count(char input) {
@@ -56,7 +51,7 @@ public class CharCollection {
 
         char top = chars.get(0);
         int counter1 = 0;
-        int counter2 = 0;
+        int max = 0;
 
         for (char c : chars) {
 
@@ -65,9 +60,9 @@ public class CharCollection {
                     counter1++;
                 }
             }
-            if (counter1 > counter2) {
+            if (counter1 > max) {
                 top = c;
-                counter2 = counter1;
+                max = counter1;
             }
             counter1 = 0;
         }
@@ -172,12 +167,10 @@ public class CharCollection {
         for (Character c : cc.chars) {
             if (chars.contains(c.charValue())) {
                 if (abgleich.contains(c.charValue())) {
-                    try {
+
                         remove.remove(c);
                         abgleich.remove(c);
-                    } catch (Exception e) {
-                        return false;
-                    }
+
                 }
 
             } else {
