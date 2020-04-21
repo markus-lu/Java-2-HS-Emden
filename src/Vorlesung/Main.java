@@ -8,9 +8,14 @@ public class Main {
 
         try {
             Vorlesungsverzeichnis eins = new Vorlesungsverzeichnis();
+
+
+            System.out.println(eins.multipleTitles());
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
     }
 

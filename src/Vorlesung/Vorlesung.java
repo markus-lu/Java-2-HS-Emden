@@ -1,5 +1,7 @@
 package Vorlesung;
 
+import java.util.Objects;
+
 public class Vorlesung {
 
     private String studiengruppe;
@@ -45,4 +47,16 @@ public class Vorlesung {
     public void setTeilnehmer(String teilnehmer) {
         this.teilnehmer = teilnehmer;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Vorlesung)) return false;
+        Vorlesung vorlesung = (Vorlesung) o;
+        return Objects.equals(getStudiengruppe(), vorlesung.getStudiengruppe()) &&
+                Objects.equals(getTitel(), vorlesung.getTitel()) &&
+                Objects.equals(getDozent(), vorlesung.getDozent()) &&
+                Objects.equals(getTeilnehmer(), vorlesung.getTeilnehmer());
+    }
+
 }
