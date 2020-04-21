@@ -1,4 +1,4 @@
-package Vorlesung;
+package A3.vorlesung;
 
 import java.util.Objects;
 

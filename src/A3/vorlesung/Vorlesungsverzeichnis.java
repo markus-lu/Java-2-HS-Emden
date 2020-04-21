@@ -1,4 +1,4 @@
-package Vorlesung;
+package A3.vorlesung;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,19 +10,19 @@ public class Vorlesungsverzeichnis {
     private Set<Vorlesung> verzeichnis = new HashSet();
 
 
-    Vorlesungsverzeichnis() throws IOException {
+    Vorlesungsverzeichnis() throws IOException, TextFileFormatException {
         String filname = "src\\Vorlesung\\db_junit.txt";
         verzeichnis = load(filname);
         // int test = 0;
     }
 
 
-    Vorlesungsverzeichnis(String filename) throws IOException {
+    public Vorlesungsverzeichnis(String filename) throws IOException, TextFileFormatException {
         verzeichnis = load(filename);
     }
 
 
-    private HashSet load(String filename) throws IOException {
+    private HashSet load(String filename) throws IOException, TextFileFormatException {
 
         HashSet<Vorlesung> erg = new HashSet<>();
         BufferedReader br = new BufferedReader(new FileReader(filename));
@@ -31,6 +31,16 @@ public class Vorlesungsverzeichnis {
         String line = br.readLine();
         while (line != null) {
             String[] veranstaltung = line.split(":");
+
+            if (veranstaltung.length > 4)
+                throw new TextFileFormatException("Zu viele Angaben");
+            if (veranstaltung.length < 4)
+                throw new TextFileFormatException("Zu wenig Angaben");
+            if (veranstaltung[0].equals("") || veranstaltung[1].equals("") || veranstaltung[2].equals("") || veranstaltung[3].equals(""))
+                throw new TextFileFormatException("Bitte alle Felder angeben");
+            if (!veranstaltung[3].matches("^\\d+$"))
+                throw new TextFileFormatException("Die Teilnehmeranzahl muss eine Zahl sein");
+
 
             Vorlesung vorlesung = new Vorlesung(veranstaltung[0], veranstaltung[1], veranstaltung[2], veranstaltung[3]);
 
@@ -44,10 +54,12 @@ public class Vorlesungsverzeichnis {
 
     public List<String> titles() {
 
-        List<String> erg = new ArrayList<>();
-        for (Vorlesung v : verzeichnis)
-            erg.add(v.getTitel());
+        Set<String> buffer = new HashSet<>();
 
+        for (Vorlesung v : verzeichnis)
+            buffer.add(v.getTitel());
+
+        List<String> erg = new ArrayList<>(buffer);
         Collections.sort(erg);
 
         return erg;
@@ -67,6 +79,7 @@ public class Vorlesungsverzeichnis {
             }
             if (counter > 1)
                 erg.add(vc.getDozent());
+            counter = 0;
         }
         return erg;
     }

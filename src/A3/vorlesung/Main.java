@@ -1,4 +1,4 @@
-package Vorlesung;
+package A3.vorlesung;
 
 import java.io.IOException;
 
@@ -13,6 +13,8 @@ public class Main {
             System.out.println(eins.multipleTitles());
 
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TextFileFormatException e) {
             e.printStackTrace();
         }
 
