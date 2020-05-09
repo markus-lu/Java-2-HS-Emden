@@ -10,7 +10,7 @@ public class Main {
             Vorlesungsverzeichnis eins = new Vorlesungsverzeichnis();
 
 
-            System.out.println(eins.multipleTitles());
+            System.out.println(eins.titles());
 
         } catch (IOException e) {
             e.printStackTrace();

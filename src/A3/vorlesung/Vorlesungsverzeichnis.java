@@ -11,8 +11,8 @@ public class Vorlesungsverzeichnis {
 
 
     Vorlesungsverzeichnis() throws IOException, TextFileFormatException {
-        String filname = "src\\Vorlesung\\db_junit.txt";
-        verzeichnis = load(filname);
+        //String filname = "src\\A3\\db_junit.txt";
+        //verzeichnis = load(filname);
         // int test = 0;
     }
 

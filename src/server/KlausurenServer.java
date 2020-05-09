@@ -1,16 +1,15 @@
 package server;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.ServerSocket;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class KlausurenServer extends Thread {
 
     ServerSocket serverSo;
-    private Map<String, List<Integer>> values;
+    private Map<String, List<Integer>> values = new HashMap<>();
 
 
     KlausurenServer(Integer port) {
@@ -23,13 +22,14 @@ public class KlausurenServer extends Thread {
     }
 
     public void run() {
-        int clNr = 0;
+
+
         try {
-            Client client = new Client(serverSo.accept(), clNr);
-            clNr++;
-            BufferedReader input = new BufferedReader(new InputStreamReader());
+            while (true) {
+                Client client = new Client(serverSo.accept(), values);
+                client.start();
 
-
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
