@@ -15,7 +15,7 @@ public class KlausurenServer extends Thread {
     KlausurenServer(Integer port) {
         try {
             serverSo = new ServerSocket(port);
-
+            System.out.println("Server Online");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -26,7 +26,7 @@ public class KlausurenServer extends Thread {
 
         try {
             while (true) {
-                Client client = new Client(serverSo.accept(), values);
+                ClientManager client = new ClientManager(serverSo.accept(), values);
                 client.start();
 
             }
