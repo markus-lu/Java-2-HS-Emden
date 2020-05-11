@@ -10,7 +10,7 @@ public class KlausurenServer extends Thread {
 
     ServerSocket serverSo;
     private Map<String, List<Integer>> values = new HashMap<>();
-
+    boolean running = true;
 
     KlausurenServer(Integer port) {
         try {
@@ -26,8 +26,8 @@ public class KlausurenServer extends Thread {
 
 
         try {
-            while (true) {
-                ClientManager client = new ClientManager(serverSo.accept(), values);
+            while (running) {
+                ClientManager client = new ClientManager(serverSo.accept(), values,this);
                 client.start();
             }
         } catch (IOException e) {
@@ -38,4 +38,12 @@ public class KlausurenServer extends Thread {
     }
 
 
+    public void stopRunning(){
+        running = false;
+        try {
+            serverSo.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

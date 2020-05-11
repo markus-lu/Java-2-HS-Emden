@@ -12,11 +12,11 @@ public class ClientManager extends Thread {
 
     private Socket clientSocket;
     private Map<String, List<Integer>> values;
+    private KlausurenServer server;
 
-
-    ClientManager(Socket clientSocket, Map<String, List<Integer>> values) {
+    ClientManager(Socket clientSocket, Map<String, List<Integer>> values, KlausurenServer klausurenServer) {
         this.clientSocket = clientSocket;
-
+        this.server = klausurenServer;
         this.values = values;
     }
 
@@ -93,8 +93,8 @@ public class ClientManager extends Thread {
                 case ("STOP"):
                 case ("stop"):
                     output.println("1");
-                    clientSocket.close();
-
+                    server.stopRunning();
+                    break;
                 default:
                     output.println("test failed");
 
