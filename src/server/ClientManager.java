@@ -37,15 +37,6 @@ public class ClientManager extends Thread {
             PrintWriter output = new PrintWriter(clientSocket.getOutputStream(), true);
 
             switch (input[0]) {
-                case "hello ":
-                    output.println("General Kenobi");
-                    output.println(input[1]);
-                    break;
-                case ("engage"):
-                    output.println("Couse Earth Warp 9");
-                    break;
-                case ("test"):
-                    output.println(input[1]);
                 case ("PUT"):
                 case ("put"):
                     String[] ids = input[2].split(",");
@@ -89,19 +80,32 @@ public class ClientManager extends Thread {
                     for (String k : keys) {
                         onlyValues.add(values.get(k));
                     }
-                    List<List<Integer>> buffer = new ArrayList<>(onlyValues);
-                    for (List<Integer> l : onlyValues) {
-                        buffer.remove(l);
-                        for (List<Integer> ls : buffer) {
 
-                            if (isSubList(l, ls)) {
-                                onlyValues.remove(l);
+                    List<List<Integer>> toRemove = new ArrayList<>();
+
+                    for (List<Integer> list : onlyValues) {
+                        for (List<Integer> list2 : onlyValues) {
+                            if (list != list2) {
+                                if (list.containsAll(list2)) {
+                                    if (!toRemove.contains(list2)) {
+                                        toRemove.add(list2);
+                                    }
+                                }
                             }
+                        }
+                    }
 
+                    onlyValues.removeAll(toRemove);
+                    String getall = "";
+                    for (int i = 0; i < onlyValues.size(); i++) {
+                        if (i == 0) {
+                            getall += onlyValues.get(i);
+                        } else {
+                            getall += "," + onlyValues.get(i);
                         }
 
                     }
-                    output.println(onlyValues);
+                    output.println("1 " + getall.replaceAll(" ", ""));
 
                     break;
                 case ("STOP"):
@@ -116,7 +120,8 @@ public class ClientManager extends Thread {
             //output.println("General Kenobi");
             //output.println("test");
 
-
+            br.close();
+            output.close();
             clientSocket.close();
 
         } catch (IOException e) {
@@ -126,33 +131,4 @@ public class ClientManager extends Thread {
 
     }
 
-    private boolean isSubList(List<Integer> a, List<Integer> b) {
-
-        List<Integer> kleiner = new ArrayList<>();
-        List<Integer> groesser = new ArrayList<>();
-        if (a.size() > b.size()) {
-            kleiner = b;
-            groesser = a;
-        } else if (a.size() < b.size()) {
-            kleiner = a;
-            groesser = b;
-        } else {
-
-            kleiner = a;
-            groesser = b;
-        }
-        List<Integer> remove = kleiner;
-        for (Integer k : kleiner) {
-            for (Integer g : groesser) {
-                if (k == g) {
-                    remove.remove(k);
-                }
-            }
-        }
-        if (remove.size() == 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 }
